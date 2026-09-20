@@ -1,0 +1,11 @@
+analysis,model_or_method,metric,value,provenance
+pan_cancer,Ward_k5,ARI,0.993,original_saved_output
+pan_cancer,Ward_k5,NMI,0.991,original_saved_output
+luminal_subtype,baseline_RF,MCC,0.5709,original_saved_output
+luminal_subtype,tuned_RF,MCC,0.5693,original_saved_output
+luminal_subtype,Boruta_PC_RF,MCC,0.5514,original_saved_output
+lymph_node,RF,ROC_AUC,0.5946,original_saved_output
+lymph_node,XGBoost,ROC_AUC,0.5987,original_saved_output
+lymph_node,LightGBM,ROC_AUC,0.6225,original_saved_output
+lymph_node,Gradient_Boosting,ROC_AUC,0.6147,original_saved_output
+lymph_node,Soft_voting,ROC_AUC,0.6098,original_saved_output

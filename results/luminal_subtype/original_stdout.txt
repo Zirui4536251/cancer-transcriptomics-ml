@@ -1,0 +1,594 @@
+Original source cell 1
+Reading gene expression data...
+Gene Expression Data Shape: (26991, 1190)
+Number of genes: 26991, Number of samples: 1190
+
+Reading clinical data...
+Clinical Data Shape: (1190, 84)
+
+Gene expression data information:
+<class 'pandas.core.frame.DataFrame'>
+Index: 26991 entries, TSPAN6|ENSG00000000003.15 to PANO1|ENSG00000288675.1
+Columns: 1190 entries, TCGA-AC-A8OP-01A-11R-A36F-07 to TCGA-AR-A251-01A-12R-A169-07
+dtypes: float64(1190)
+memory usage: 245.3+ MB
+None
+
+Number of Missing Values: 0
+
+Transposed gene expression data...
+Transposed shape: (1190, 26991)
+
+Calculate the variance for each gene...
+
+
+Original source cell 1
+
+Screening genes using the variance threshold method...
+Selected variance threshold: 0.451042
+Number of genes after screening: 20243
+Remain 75.00% genes
+
+
+Original source cell 3
+
+Prepare data for PCA...
+data for PC's shape: (1190, 20243)
+
+Extracting subtype information from clinical data...
+find out pam50
+Using 'barcode' as sample ID
+Sucessful extract 1190 samples information
+
+Matching expression data samples with subtype information...
+Successful match 1190 samples
+Unsuccessful match 0 samples
+
+Distribution of Statistical Subtypes:
+  LumA: 560
+  LumB: 209
+  Her2: 82
+  Healthy: 112
+  Basal: 188
+  Normal-like: 39
+
+Data Standardization...
+
+Analysising PCA...
+PCA completed, yielding 50 PCA
+Proportion of variance explained by the top 10 principal components:
+  PC1: 0.0982 (9.82%)
+  PC2: 0.0830 (8.30%)
+  PC3: 0.0442 (4.42%)
+  PC4: 0.0379 (3.79%)
+  PC5: 0.0301 (3.01%)
+  PC6: 0.0215 (2.15%)
+  PC7: 0.0176 (1.76%)
+  PC8: 0.0147 (1.47%)
+  PC9: 0.0144 (1.44%)
+  PC10: 0.0112 (1.12%)
+
+
+Original source cell 3
+
+Define Subtype Color Mapping...
+
+3D Scatter Plot...
+
+
+Original source cell 3
+
+Faceted diagram...
+
+
+Original source cell 3
+
+Calculate the degree of separation between subtypes:
+  Healthy: PC1=99.162, PC2=24.149
+  LumA: PC1=-8.574, PC2=22.755
+  Normal-like: PC1=41.295, PC2=-11.623
+  LumB: PC1=-36.840, PC2=4.940
+  Her2: PC1=-16.199, PC2=-29.018
+  Basal: PC1=5.918, PC2=-72.593
+
+Visual Subtype Center...
+
+
+Original source cell 5
+
+1. Preparing Luminal A and Luminal B data...
+Found 769 Luminal samples
+  - Luminal A: 560
+  - Luminal B: 209
+
+2. Creating feature matrix and labels...
+Feature matrix shape (top 10 PCs): (769, 10)
+Number of labels: 769
+Variance explained by top 10 PCs: 0.3726 (37.26%)
+Label encoding: {np.str_('LumA'): 0, np.str_('LumB'): 1}
+
+3. Splitting training and test sets...
+Training set size: 538 samples
+Test set size: 231 samples
+Training class distribution: LumA=392, LumB=146
+Test class distribution: LumA=168, LumB=63
+
+4. Building baseline Random Forest classifier...
+  Training baseline model...
+
+Baseline model performance evaluation:
+----------------------------------------
+Confusion matrix:
+[[158  10]
+ [ 27  36]]
+  Predicted:   LumA  LumB
+  True:
+  LumA     158    10
+  LumB      27    36
+
+Accuracy: 0.8398
+Precision: 0.7826
+Recall: 0.5714
+F1 score: 0.6606
+Matthews Correlation Coefficient (MCC): 0.5709
+
+5. Hyperparameter tuning using simplified grid search...
+Number of parameter combinations: 432
+Cross-validation folds: 5
+Total models to train: 2160
+Starting grid search...
+
+Start time: 16:19:37
+Fitting 5 folds for each of 432 candidates, totalling 2160 fits
+
+Grid search completed!
+End time: 16:21:12
+Total runtime: 95.74 seconds
+Best parameters: {'max_depth': None, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'min_samples_split': 5, 'n_estimators': 100}
+Best cross-validation MCC: 0.5023
+
+6. Training final model using best parameters...
+
+Optimized model performance evaluation:
+----------------------------------------
+Confusion matrix:
+[[159   9]
+ [ 28  35]]
+  Predicted:   LumA  LumB
+  True:
+  LumA     159     9
+  LumB      28    35
+
+Accuracy: 0.8398
+Precision: 0.7955
+Recall: 0.5556
+F1 score: 0.6542
+Matthews Correlation Coefficient (MCC): 0.5693
+
+7. Visualizing model performance...
+
+
+Original source cell 7
+
+============================================================
+Part Four: Boruta Feature Selector for Identifying Key Genes
+============================================================
+
+2. Preparing Boruta input data...
+Training data shape: (538, 10)
+Number of features (top 10 PCs): 10
+Number of samples: 538
+Number of LumA samples: 392
+Number of LumB samples: 146
+
+3. Initializing Boruta feature selector...
+
+4. Running Boruta feature selection...
+Note: This may take some time...
+Iteration: 	1 / 50
+Confirmed: 	0
+Tentative: 	10
+Rejected: 	0
+Iteration: 	2 / 50
+Confirmed: 	0
+Tentative: 	10
+Rejected: 	0
+Iteration: 	3 / 50
+Confirmed: 	0
+Tentative: 	10
+Rejected: 	0
+Iteration: 	4 / 50
+Confirmed: 	0
+Tentative: 	10
+Rejected: 	0
+Iteration: 	5 / 50
+Confirmed: 	0
+Tentative: 	10
+Rejected: 	0
+Iteration: 	6 / 50
+Confirmed: 	0
+Tentative: 	10
+Rejected: 	0
+Iteration: 	7 / 50
+Confirmed: 	0
+Tentative: 	10
+Rejected: 	0
+Iteration: 	8 / 50
+Confirmed: 	6
+Tentative: 	4
+Rejected: 	0
+Iteration: 	9 / 50
+Confirmed: 	6
+Tentative: 	4
+Rejected: 	0
+Iteration: 	10 / 50
+Confirmed: 	6
+Tentative: 	4
+Rejected: 	0
+Iteration: 	11 / 50
+Confirmed: 	6
+Tentative: 	4
+Rejected: 	0
+Iteration: 	12 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	13 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	14 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	15 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	16 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	17 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	18 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	19 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	20 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	21 / 50
+Confirmed: 	6
+Tentative: 	3
+Rejected: 	1
+Iteration: 	22 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	23 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	24 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	25 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	26 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	27 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	28 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	29 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	30 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	31 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	32 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	33 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	34 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	35 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	36 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	37 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	38 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	39 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	40 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	41 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	42 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	43 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	44 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	45 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	46 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	47 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	48 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+Iteration: 	49 / 50
+Confirmed: 	7
+Tentative: 	2
+Rejected: 	1
+
+
+BorutaPy finished running.
+
+Iteration: 	50 / 50
+Confirmed: 	7
+Tentative: 	0
+Rejected: 	3
+Boruta feature selection completed. Time elapsed: 7.44 seconds
+
+5. Retrieving feature selection results...
+
+Feature selection summary:
+  Accepted features (important): 7
+  Tentative features: 0
+  Rejected features: 3
+  Total number of features (PCs): 10
+  Feature reduction ratio: 30.00%
+
+Accepted feature indices: [0 1 2 3 5 6 7]
+
+Feature ranking (1 = most important):
+  Rank 1: 7 features
+  Rank 2: 1 features
+  Rank 3: 1 features
+  Rank 4: 1 features
+
+Key principal components accepted by Boruta:
+  PC1: Rank 1, Variance explained 9.82%
+  PC2: Rank 1, Variance explained 8.30%
+  PC3: Rank 1, Variance explained 4.42%
+  PC4: Rank 1, Variance explained 3.79%
+  PC6: Rank 1, Variance explained 2.15%
+  PC7: Rank 1, Variance explained 1.76%
+  PC8: Rank 1, Variance explained 1.47%
+
+7. Performance comparison: Boruta-selected features vs all features...
+Training data shape after feature selection: (538, 7)
+Test data shape after feature selection: (231, 7)
+  Training model using all features...
+  Training model using Boruta-selected features...
+
+Performance comparison results:
+  All-features model MCC: 0.5709
+  Boruta-selected model MCC: 0.5514
+  Performance change: -0.0194
+  All-features model accuracy: 0.8398
+  Boruta-selected model accuracy: 0.8312
+  ⚠️  Boruta feature selection had little impact on performance
+
+8. Mapping key principal components back to key genes...
+Successfully retrieved 20243 gene names
+
+List of key genes:
+================================================================================
+
+Top 15 key genes for principal component PC1:
+------------------------------------------------------------
+   1. STARD9|ENSG00000159433.12 Loading: 0.0193 (Positive, Absolute: 0.0193)
+   2. TGFBR2|ENSG00000163513.19 Loading: 0.0192 (Positive, Absolute: 0.0192)
+   3. SYNE3|ENSG00000176438.12 Loading: 0.0189 (Positive, Absolute: 0.0189)
+   4. DMD|ENSG00000198947.16 Loading: 0.0189 (Positive, Absolute: 0.0189)
+   5. CAV2|ENSG00000105971.15 Loading: 0.0188 (Positive, Absolute: 0.0188)
+   6. CAV1|ENSG00000105974.13 Loading: 0.0188 (Positive, Absolute: 0.0188)
+   7. FAM126A|ENSG00000122591.12 Loading: 0.0187 (Positive, Absolute: 0.0187)
+   8. KLHL29|ENSG00000119771.15 Loading: 0.0187 (Positive, Absolute: 0.0187)
+   9. SLC16A7|ENSG00000118596.12 Loading: 0.0186 (Positive, Absolute: 0.0186)
+  10. TNS1|ENSG00000079308.19 Loading: 0.0185 (Positive, Absolute: 0.0185)
+  11. MAGI2-AS3|ENSG00000234456.8 Loading: 0.0185 (Positive, Absolute: 0.0185)
+  12. PROS1|ENSG00000184500.16 Loading: 0.0185 (Positive, Absolute: 0.0185)
+  13. NA|ENSG00000261468.1 Loading: 0.0184 (Positive, Absolute: 0.0184)
+  14. DDR2|ENSG00000162733.19 Loading: 0.0183 (Positive, Absolute: 0.0183)
+  15. ADAMTS9-AS2|ENSG00000241684.6 Loading: 0.0183 (Positive, Absolute: 0.0183)
+
+Top 15 key genes for principal component PC2:
+------------------------------------------------------------
+   1. THSD4|ENSG00000187720.14 Loading: 0.0195 (Positive, Absolute: 0.0195)
+   2. TBC1D9|ENSG00000109436.8 Loading: 0.0195 (Positive, Absolute: 0.0195)
+   3. CENPW|ENSG00000203760.9 Loading: -0.0195 (Negative, Absolute: 0.0195)
+   4. LINC00504|ENSG00000248360.7 Loading: 0.0195 (Positive, Absolute: 0.0195)
+   5. MIR3936HG|ENSG00000233006.8 Loading: 0.0195 (Positive, Absolute: 0.0195)
+   6. NA|ENSG00000287914.1 Loading: 0.0194 (Positive, Absolute: 0.0194)
+   7. YBX1|ENSG00000065978.19 Loading: -0.0194 (Negative, Absolute: 0.0194)
+   8. ERBB4|ENSG00000178568.15 Loading: 0.0194 (Positive, Absolute: 0.0194)
+   9. CCDC170|ENSG00000120262.10 Loading: 0.0193 (Positive, Absolute: 0.0193)
+  10. FAM47E|ENSG00000189157.14 Loading: 0.0191 (Positive, Absolute: 0.0191)
+  11. ESR1|ENSG00000091831.24 Loading: 0.0190 (Positive, Absolute: 0.0190)
+  12. KLHDC1|ENSG00000197776.8 Loading: 0.0190 (Positive, Absolute: 0.0190)
+  13. CCNE1|ENSG00000105173.14 Loading: -0.0190 (Negative, Absolute: 0.0190)
+  14. TTC6|ENSG00000139865.16 Loading: 0.0189 (Positive, Absolute: 0.0189)
+  15. MTHFD1L|ENSG00000120254.16 Loading: -0.0188 (Negative, Absolute: 0.0188)
+
+Top 15 key genes for principal component PC3:
+------------------------------------------------------------
+   1. TGFB1|ENSG00000105329.11 Loading: 0.0235 (Positive, Absolute: 0.0235)
+   2. THY1|ENSG00000154096.14 Loading: 0.0229 (Positive, Absolute: 0.0229)
+   3. CTSK|ENSG00000143387.14 Loading: 0.0227 (Positive, Absolute: 0.0227)
+   4. LUM|ENSG00000139329.5 Loading: 0.0221 (Positive, Absolute: 0.0221)
+   5. LY86|ENSG00000112799.9 Loading: 0.0221 (Positive, Absolute: 0.0221)
+   6. COL1A2|ENSG00000164692.18 Loading: 0.0219 (Positive, Absolute: 0.0219)
+   7. HTRA1|ENSG00000166033.13 Loading: 0.0219 (Positive, Absolute: 0.0219)
+   8. AEBP1|ENSG00000106624.11 Loading: 0.0217 (Positive, Absolute: 0.0217)
+   9. SPARC|ENSG00000113140.11 Loading: 0.0216 (Positive, Absolute: 0.0216)
+  10. COL3A1|ENSG00000168542.16 Loading: 0.0214 (Positive, Absolute: 0.0214)
+  11. EVI2A|ENSG00000126860.12 Loading: 0.0214 (Positive, Absolute: 0.0214)
+  12. COL5A2|ENSG00000204262.14 Loading: 0.0214 (Positive, Absolute: 0.0214)
+  13. CALHM5|ENSG00000178033.6 Loading: 0.0214 (Positive, Absolute: 0.0214)
+  14. SELPLG|ENSG00000110876.10 Loading: 0.0212 (Positive, Absolute: 0.0212)
+  15. NOX4|ENSG00000086991.13 Loading: 0.0211 (Positive, Absolute: 0.0211)
+
+Top 15 key genes for principal component PC4:
+------------------------------------------------------------
+   1. NFATC2IP-AS1|ENSG00000260853.2 Loading: 0.0239 (Positive, Absolute: 0.0239)
+   2. CCR4|ENSG00000183813.7 Loading: 0.0238 (Positive, Absolute: 0.0238)
+   3. NA|ENSG00000262312.2 Loading: 0.0232 (Positive, Absolute: 0.0232)
+   4. ZNF358|ENSG00000198816.7 Loading: -0.0232 (Negative, Absolute: 0.0232)
+   5. RUBCN|ENSG00000145016.16 Loading: 0.0228 (Positive, Absolute: 0.0228)
+   6. PTPRC|ENSG00000081237.20 Loading: 0.0228 (Positive, Absolute: 0.0228)
+   7. NA|ENSG00000269825.1 Loading: 0.0226 (Positive, Absolute: 0.0226)
+   8. CCR8|ENSG00000179934.7 Loading: 0.0226 (Positive, Absolute: 0.0226)
+   9. TMEM256|ENSG00000205544.4 Loading: -0.0226 (Negative, Absolute: 0.0226)
+  10. NA|ENSG00000285979.1 Loading: 0.0224 (Positive, Absolute: 0.0224)
+  11. USP37|ENSG00000135913.11 Loading: 0.0224 (Positive, Absolute: 0.0224)
+  12. NA|ENSG00000280173.1 Loading: 0.0224 (Positive, Absolute: 0.0224)
+  13. ITGA4|ENSG00000115232.14 Loading: 0.0222 (Positive, Absolute: 0.0222)
+  14. KLHL6|ENSG00000172578.12 Loading: 0.0222 (Positive, Absolute: 0.0222)
+  15. CEP295|ENSG00000166004.15 Loading: 0.0221 (Positive, Absolute: 0.0221)
+
+Top 15 key genes for principal component PC6:
+------------------------------------------------------------
+   1. PODNL1|ENSG00000132000.13 Loading: 0.0304 (Positive, Absolute: 0.0304)
+   2. EFNA4|ENSG00000243364.8 Loading: 0.0289 (Positive, Absolute: 0.0289)
+   3. KRT7-AS|ENSG00000257671.1 Loading: 0.0285 (Positive, Absolute: 0.0285)
+   4. ARSL|ENSG00000157399.16 Loading: 0.0285 (Positive, Absolute: 0.0285)
+   5. LINC01711|ENSG00000268941.2 Loading: 0.0283 (Positive, Absolute: 0.0283)
+   6. KRT7|ENSG00000135480.16 Loading: 0.0275 (Positive, Absolute: 0.0275)
+   7. PTK7|ENSG00000112655.16 Loading: 0.0273 (Positive, Absolute: 0.0273)
+   8. KLK4|ENSG00000167749.11 Loading: 0.0272 (Positive, Absolute: 0.0272)
+   9. GRP|ENSG00000134443.10 Loading: 0.0272 (Positive, Absolute: 0.0272)
+  10. PPP1R13L|ENSG00000104881.16 Loading: 0.0270 (Positive, Absolute: 0.0270)
+  11. SDC1|ENSG00000115884.11 Loading: 0.0268 (Positive, Absolute: 0.0268)
+  12. ST6GAL2|ENSG00000144057.15 Loading: 0.0259 (Positive, Absolute: 0.0259)
+  13. VTCN1|ENSG00000134258.17 Loading: 0.0257 (Positive, Absolute: 0.0257)
+  14. FBLIM1|ENSG00000162458.13 Loading: 0.0257 (Positive, Absolute: 0.0257)
+  15. PDLIM7|ENSG00000196923.14 Loading: 0.0256 (Positive, Absolute: 0.0256)
+
+Top 15 key genes for principal component PC7:
+------------------------------------------------------------
+   1. NA|ENSG00000236841.8 Loading: 0.0247 (Positive, Absolute: 0.0247)
+   2. RCN3|ENSG00000142552.8 Loading: 0.0246 (Positive, Absolute: 0.0246)
+   3. COL5A3|ENSG00000080573.7 Loading: 0.0240 (Positive, Absolute: 0.0240)
+   4. LIME1|ENSG00000203896.10 Loading: 0.0240 (Positive, Absolute: 0.0240)
+   5. HOXC8|ENSG00000037965.6 Loading: 0.0240 (Positive, Absolute: 0.0240)
+   6. NA|ENSG00000260517.3 Loading: 0.0238 (Positive, Absolute: 0.0238)
+   7. NOX4|ENSG00000086991.13 Loading: 0.0237 (Positive, Absolute: 0.0237)
+   8. SALL4|ENSG00000101115.13 Loading: 0.0236 (Positive, Absolute: 0.0236)
+   9. EHF|ENSG00000135373.13 Loading: -0.0234 (Negative, Absolute: 0.0234)
+  10. BTBD19|ENSG00000222009.8 Loading: 0.0232 (Positive, Absolute: 0.0232)
+  11. ADAMTS7|ENSG00000136378.15 Loading: 0.0230 (Positive, Absolute: 0.0230)
+  12. SRPX2|ENSG00000102359.8 Loading: 0.0229 (Positive, Absolute: 0.0229)
+  13. AEBP1|ENSG00000106624.11 Loading: 0.0228 (Positive, Absolute: 0.0228)
+  14. COL6A2|ENSG00000142173.16 Loading: 0.0228 (Positive, Absolute: 0.0228)
+  15. PCOLCE|ENSG00000106333.13 Loading: 0.0228 (Positive, Absolute: 0.0228)
+
+Top 15 key genes for principal component PC8:
+------------------------------------------------------------
+   1. NA|ENSG00000244468.1 Loading: 0.0315 (Positive, Absolute: 0.0315)
+   2. ALDH3B2|ENSG00000132746.15 Loading: 0.0307 (Positive, Absolute: 0.0307)
+   3. MUCL1|ENSG00000172551.11 Loading: 0.0305 (Positive, Absolute: 0.0305)
+   4. POF1B|ENSG00000124429.18 Loading: 0.0296 (Positive, Absolute: 0.0296)
+   5. FGFR4|ENSG00000160867.15 Loading: 0.0294 (Positive, Absolute: 0.0294)
+   6. FA2H|ENSG00000103089.9 Loading: 0.0289 (Positive, Absolute: 0.0289)
+   7. SPINK8|ENSG00000229453.2 Loading: 0.0289 (Positive, Absolute: 0.0289)
+   8. GPX2|ENSG00000176153.12 Loading: 0.0289 (Positive, Absolute: 0.0289)
+   9. NA|ENSG00000257989.1 Loading: 0.0287 (Positive, Absolute: 0.0287)
+  10. IYD|ENSG00000009765.15 Loading: 0.0283 (Positive, Absolute: 0.0283)
+  11. EAF2|ENSG00000145088.9 Loading: 0.0282 (Positive, Absolute: 0.0282)
+  12. CLEC5A|ENSG00000258227.7 Loading: -0.0278 (Negative, Absolute: 0.0278)
+  13. LRRC75B|ENSG00000178026.13 Loading: 0.0270 (Positive, Absolute: 0.0270)
+  14. OR7E47P|ENSG00000257542.5 Loading: 0.0270 (Positive, Absolute: 0.0270)
+  15. ST6GALNAC1|ENSG00000070526.15 Loading: 0.0270 (Positive, Absolute: 0.0270)
+
+Key gene statistics:
+  Total unique key genes identified: 103
+  Total gene–PC associations: 105
+Key gene details saved: boruta_results_pca/key_genes_details.csv
+Unique key gene list saved: boruta_results_pca/unique_key_genes.csv
+Key gene text file saved: boruta_results_pca/unique_key_genes.txt
+
+Top 20 most important key genes (by absolute loading):
+--------------------------------------------------------------------------------
+   1. NA|ENSG00000244468.1 (PC8) Loading: 0.0315 (Positive)
+   2. ALDH3B2|ENSG00000132746.15 (PC8) Loading: 0.0307 (Positive)
+   3. MUCL1|ENSG00000172551.11 (PC8) Loading: 0.0305 (Positive)
+   1. PODNL1|ENSG00000132000.13 (PC6) Loading: 0.0304 (Positive)
+   4. POF1B|ENSG00000124429.18 (PC8) Loading: 0.0296 (Positive)
+   5. FGFR4|ENSG00000160867.15 (PC8) Loading: 0.0294 (Positive)
+   6. FA2H|ENSG00000103089.9 (PC8) Loading: 0.0289 (Positive)
+   7. SPINK8|ENSG00000229453.2 (PC8) Loading: 0.0289 (Positive)
+   2. EFNA4|ENSG00000243364.8 (PC6) Loading: 0.0289 (Positive)
+   8. GPX2|ENSG00000176153.12 (PC8) Loading: 0.0289 (Positive)
+   9. NA|ENSG00000257989.1 (PC8) Loading: 0.0287 (Positive)
+   3. KRT7-AS|ENSG00000257671.1 (PC6) Loading: 0.0285 (Positive)
+   4. ARSL|ENSG00000157399.16 (PC6) Loading: 0.0285 (Positive)
+   5. LINC01711|ENSG00000268941.2 (PC6) Loading: 0.0283 (Positive)
+  10. IYD|ENSG00000009765.15 (PC8) Loading: 0.0283 (Positive)
+  11. EAF2|ENSG00000145088.9 (PC8) Loading: 0.0282 (Positive)
+  12. CLEC5A|ENSG00000258227.7 (PC8) Loading: -0.0278 (Negative)
+   6. KRT7|ENSG00000135480.16 (PC6) Loading: 0.0275 (Positive)
+   7. PTK7|ENSG00000112655.16 (PC6) Loading: 0.0273 (Positive)
+   8. KLK4|ENSG00000167749.11 (PC6) Loading: 0.0272 (Positive)

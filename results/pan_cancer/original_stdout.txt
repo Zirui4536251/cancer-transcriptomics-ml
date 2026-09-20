@@ -1,0 +1,359 @@
+Original source cell 1
+Loading data...
+data shape: (20531, 801)
+label shape: (801, 1)
+number of sample: 801
+number of gene: 20531
+label distribution :
+Class
+BRCA    300
+KIRC    146
+LUAD    141
+PRAD    136
+COAD     78
+Name: count, dtype: int64
+
+
+Original source cell 3
+
+2. Perform PCA analysis...
+Coefficient of Determination: [0.10539781 0.08754232 0.07810081]
+Cumulative Explained Variance: [0.10539781 0.19294014 0.27104095]
+
+
+Original source cell 5
+
+3. Gene Screening - Based on Variance...
+
+
+Original source cell 5
+Distance-based method-determined elbow point location: The 1419th gene
+Variance value at the elbow point: 5.363299939325615
+
+
+Original source cell 5
+
+Data shape before filtering: (20531, 801)
+Shape of filtered data: (1419, 801)
+1419 genes were retained (6.9%)
+
+
+Original source cell 7
+
+4. Hierarchical Cluster Analysis...
+Adjust the Rand Index (ARI): 0.993
+Standardized Mutual Information (NMI): 0.991
+
+Confusion Matrix Between Clustering and True Labels:
+True_Label  BRCA  COAD  KIRC  LUAD  PRAD
+Cluster                                 
+0            300     0     0     2     0
+1              0     0   146     0     0
+2              0     0     0   139     0
+3              0     0     0     0   136
+4              0    78     0     0     0
+
+Details of Each Cluster:
+cluster0: 302samples, Main Types=BRCA, Purity=0.99
+cluster1: 146samples, Main Types=KIRC, Purity=1.00
+cluster2: 139samples, Main Types=LUAD, Purity=1.00
+cluster3: 136samples, Main Types=PRAD, Purity=1.00
+cluster4: 78samples, Main Types=COAD, Purity=1.00
+
+
+Original source cell 7
+
+Clustering Effect Evaluation:
+==================================================
+
+Cluster 0 (302Samples):
+  BRCA: 300Samples (99.3%)
+  LUAD: 2Samples (0.7%)
+
+Cluster 1 (146Samples):
+  KIRC: 146Samples (100.0%)
+
+Cluster 2 (139Samples):
+  LUAD: 139Samples (100.0%)
+
+Cluster 3 (136Samples):
+  PRAD: 136Samples (100.0%)
+
+Cluster 4 (78Samples):
+  COAD: 78Samples (100.0%)
+Average Cluster Purity: 0.999
+
+
+Original source cell 9
+
+5. BRCA Subclustering Analysis - Using Ensemble Clustering...
+Number of BRCA samples: 300
+
+Method 1: Silhouette Score
+Optimal number of clusters by Silhouette Score: 2
+
+Method 2: Davies-Bouldin Index
+Optimal number of clusters by Davies-Bouldin Index: 2
+
+Method 3: Elbow Method (based on inertia)
+
+
+Original source cell 9
+Optimal number of clusters by Elbow Method: 5
+
+Method 4: Gap Statistic
+
+
+Original source cell 9
+Optimal number of clusters by Gap Statistic: 10
+
+Method 5: Consensus Clustering
+Optimal number of clusters by Consensus Clustering: 2
+
+==================================================
+Ensemble Clustering Results Summary:
+1. Silhouette Score: 2
+2. Davies-Bouldin Index: 2
+3. Elbow Method: 5
+4. Gap Statistic: 10
+5. Consensus Clustering: 2
+
+Voting result optimal number of clusters: 2
+Weighted average optimal number of clusters: 5
+
+Final selected number of clusters: 5
+
+
+Original source cell 9
+
+Performing hierarchical clustering with optimal k=5...
+
+BRCA Samples Subcluster Distribution:
+  Subcluster 0: 28 samples (9.3%)
+  Subcluster 1: 118 samples (39.3%)
+  Subcluster 2: 52 samples (17.3%)
+  Subcluster 3: 47 samples (15.7%)
+  Subcluster 4: 55 samples (18.3%)
+
+Plotting BRCA Subclustering Heatmap...
+
+
+Original source cell 11
+
+6. Differential Gene Expression Analysis: Finding Unique and Common Genes
+============================================================
+Using k=5 for BRCA subcluster differential gene analysis
+
+Analyzing subcluster 0 (contains 28 samples)...
+  Total significantly differential genes (FDR<0.05): 350
+  Genes with >2-fold change: 90
+    - Upregulated genes (log2FC > 1): 61
+    - Downregulated genes (log2FC < -1): 29
+
+Analyzing subcluster 1 (contains 118 samples)...
+  Total significantly differential genes (FDR<0.05): 860
+  Genes with >2-fold change: 112
+    - Upregulated genes (log2FC > 1): 102
+    - Downregulated genes (log2FC < -1): 10
+
+Analyzing subcluster 2 (contains 52 samples)...
+  Total significantly differential genes (FDR<0.05): 554
+  Genes with >2-fold change: 86
+    - Upregulated genes (log2FC > 1): 11
+    - Downregulated genes (log2FC < -1): 75
+
+Analyzing subcluster 3 (contains 47 samples)...
+  Total significantly differential genes (FDR<0.05): 987
+  Genes with >2-fold change: 347
+    - Upregulated genes (log2FC > 1): 136
+    - Downregulated genes (log2FC < -1): 211
+
+Analyzing subcluster 4 (contains 55 samples)...
+  Total significantly differential genes (FDR<0.05): 875
+  Genes with >2-fold change: 225
+    - Upregulated genes (log2FC > 1): 14
+    - Downregulated genes (log2FC < -1): 211
+
+============================================================
+Gene Intersection Analysis:
+============================================================
+
+Subcluster 0:
+  Total unique genes: 33
+  - Unique upregulated genes: 40
+  - Unique downregulated genes: 12
+
+Subcluster 1:
+  Total unique genes: 10
+  - Unique upregulated genes: 91
+  - Unique downregulated genes: 4
+
+Subcluster 2:
+  Total unique genes: 11
+  - Unique upregulated genes: 8
+  - Unique downregulated genes: 16
+
+Subcluster 3:
+  Total unique genes: 185
+  - Unique upregulated genes: 111
+  - Unique downregulated genes: 181
+
+Subcluster 4:
+  Total unique genes: 61
+  - Unique upregulated genes: 12
+  - Unique downregulated genes: 139
+
+============================================================
+Common Genes Analysis:
+============================================================
+Number of genes significantly differential in all subclusters: 1
+
+Finding genes stably expressed across all subclusters...
+Number of stably expressed genes (CV<0.2): 487
+
+============================================================
+Results Presentation:
+============================================================
+
+1. Genes significantly differential in all subclusters (top 20):
+    1. UPK1B (Full ID: UPK1B|7348)
+
+2. Genes stably expressed across all subclusters (top 20, sorted by expression level):
+    1. KRT19                Average expression: 14.56, CV: 0.037 (Full ID: KRT19|3880)
+    2. POSTN                Average expression: 14.09, CV: 0.055 (Full ID: POSTN|10631)
+    3. AZGP1                Average expression: 13.64, CV: 0.050 (Full ID: AZGP1|563)
+    4. ADAM6                Average expression: 13.44, CV: 0.049 (Full ID: ADAM6|8755)
+    5. LUM                  Average expression: 13.43, CV: 0.050 (Full ID: LUM|4060)
+    6. SERPINA3             Average expression: 13.23, CV: 0.088 (Full ID: SERPINA3|12)
+    7. TRPS1                Average expression: 13.01, CV: 0.050 (Full ID: TRPS1|7227)
+    8. CRABP2               Average expression: 12.95, CV: 0.042 (Full ID: CRABP2|1382)
+    9. SFRP2                Average expression: 12.85, CV: 0.055 (Full ID: SFRP2|6423)
+   10. MUC1                 Average expression: 12.67, CV: 0.072 (Full ID: MUC1|4582)
+   11. XIST                 Average expression: 12.59, CV: 0.044 (Full ID: XIST|7503)
+   12. KIAA1324             Average expression: 12.59, CV: 0.068 (Full ID: KIAA1324|57535)
+   13. MMP11                Average expression: 12.57, CV: 0.062 (Full ID: MMP11|4320)
+   14. GATA3                Average expression: 12.47, CV: 0.142 (Full ID: GATA3|2625)
+   15. TACSTD2              Average expression: 12.46, CV: 0.029 (Full ID: TACSTD2|4070)
+   16. KRT7                 Average expression: 12.34, CV: 0.084 (Full ID: KRT7|3855)
+   17. EFHD1                Average expression: 12.20, CV: 0.040 (Full ID: EFHD1|80303)
+   18. LOC96610             Average expression: 12.16, CV: 0.058 (Full ID: LOC96610|96610)
+   19. CA12                 Average expression: 12.06, CV: 0.181 (Full ID: CA12|771)
+   20. PRLR                 Average expression: 11.93, CV: 0.068 (Full ID: PRLR|5618)
+
+3. Unique genes for each subcluster:
+
+   Unique genes of subcluster 0:
+     Unique upregulated genes (top 10):
+        1. FGB (Full ID: FGB|2244)
+        2. CTSE (Full ID: CTSE|1510)
+        3. LOC440173 (Full ID: LOC440173|440173)
+        4. FAM5C (Full ID: FAM5C|339479)
+        5. FGG (Full ID: FGG|2266)
+        6. PADI3 (Full ID: PADI3|51702)
+        7. CLCA2 (Full ID: CLCA2|9635)
+        8. UGT1A9 (Full ID: UGT1A9|54600)
+        9. C6orf223 (Full ID: C6orf223|221416)
+       10. KRT20 (Full ID: KRT20|54474)
+     Unique downregulated genes (top 10):
+        1. PPAN-P2RY11 (Full ID: PPAN-P2RY11|692312)
+        2. SORCS1 (Full ID: SORCS1|114815)
+        3. FAM5B (Full ID: FAM5B|57795)
+        4. LRP2 (Full ID: LRP2|4036)
+        5. ? (Full ID: ?|553137)
+        6. NPY1R (Full ID: NPY1R|4886)
+        7. DLX2 (Full ID: DLX2|1746)
+        8. NBPF4 (Full ID: NBPF4|148545)
+        9. PAH (Full ID: PAH|5053)
+       10. COL2A1 (Full ID: COL2A1|1280)
+
+   Unique genes of subcluster 1:
+     Unique upregulated genes (top 10):
+        1. SCARA5 (Full ID: SCARA5|286133)
+        2. UGT2B11 (Full ID: UGT2B11|10720)
+        3. GRIA4 (Full ID: GRIA4|2893)
+        4. RERGL (Full ID: RERGL|79785)
+        5. LEP (Full ID: LEP|3952)
+        6. SCTR (Full ID: SCTR|6344)
+        7. TDGF1 (Full ID: TDGF1|6997)
+        8. CYP4F12 (Full ID: CYP4F12|66002)
+        9. CDH17 (Full ID: CDH17|1015)
+       10. ISL1 (Full ID: ISL1|3670)
+     Unique downregulated genes (top 10):
+        1. MT3 (Full ID: MT3|4504)
+        2. CYP2C18 (Full ID: CYP2C18|1562)
+        3. C17orf93 (Full ID: C17orf93|360205)
+        4. GSTA2 (Full ID: GSTA2|2939)
+
+   Unique genes of subcluster 2:
+     Unique upregulated genes (top 10):
+        1. NR0B2 (Full ID: NR0B2|8431)
+        2. CGA (Full ID: CGA|1081)
+        3. SOX2 (Full ID: SOX2|6657)
+        4. ? (Full ID: ?|553137)
+        5. PAX7 (Full ID: PAX7|5081)
+        6. PCSK2 (Full ID: PCSK2|5126)
+        7. ASCL1 (Full ID: ASCL1|429)
+        8. HAVCR1 (Full ID: HAVCR1|26762)
+     Unique downregulated genes (top 10):
+        1. LOC100130933 (Full ID: LOC100130933|100130933)
+        2. SEC14L4 (Full ID: SEC14L4|284904)
+        3. PPYR1 (Full ID: PPYR1|5540)
+        4. SCGB3A1 (Full ID: SCGB3A1|92304)
+        5. C6 (Full ID: C6|729)
+        6. C4BPA (Full ID: C4BPA|722)
+        7. LPAR3 (Full ID: LPAR3|23566)
+        8. ORM2 (Full ID: ORM2|5005)
+        9. CYP8B1 (Full ID: CYP8B1|1582)
+       10. ORM1 (Full ID: ORM1|5004)
+
+   Unique genes of subcluster 3:
+     Unique upregulated genes (top 10):
+        1. MIOX (Full ID: MIOX|55586)
+        2. MUC16 (Full ID: MUC16|94025)
+        3. HRNBP3 (Full ID: HRNBP3|146713)
+        4. TEX15 (Full ID: TEX15|56154)
+        5. DNER (Full ID: DNER|92737)
+        6. LOC84856 (Full ID: LOC84856|84856)
+        7. GABRG3 (Full ID: GABRG3|2567)
+        8. MSLN (Full ID: MSLN|10232)
+        9. CXCL3 (Full ID: CXCL3|2921)
+       10. OPRK1 (Full ID: OPRK1|4986)
+     Unique downregulated genes (top 10):
+        1. TRIM58 (Full ID: TRIM58|25893)
+        2. GRPR (Full ID: GRPR|2925)
+        3. IL20 (Full ID: IL20|50604)
+        4. TOX3 (Full ID: TOX3|27324)
+        5. CPB1 (Full ID: CPB1|1360)
+        6. CYP2A6 (Full ID: CYP2A6|1548)
+        7. GFRA1 (Full ID: GFRA1|2674)
+        8. AMBP (Full ID: AMBP|259)
+        9. SPINK4 (Full ID: SPINK4|27290)
+       10. UGT2B11 (Full ID: UGT2B11|10720)
+
+   Unique genes of subcluster 4:
+     Unique upregulated genes (top 10):
+        1. GRIA2 (Full ID: GRIA2|2891)
+        2. TMEM82 (Full ID: TMEM82|388595)
+        3. SERPINA6 (Full ID: SERPINA6|866)
+        4. CLEC3A (Full ID: CLEC3A|10143)
+        5. CST9 (Full ID: CST9|128822)
+        6. CYP2A6 (Full ID: CYP2A6|1548)
+        7. PHGR1 (Full ID: PHGR1|644844)
+        8. SPINK4 (Full ID: SPINK4|27290)
+        9. KCNJ3 (Full ID: KCNJ3|3760)
+       10. NBPF6 (Full ID: NBPF6|653149)
+     Unique downregulated genes (top 10):
+        1. ANXA13 (Full ID: ANXA13|312)
+        2. HRNBP3 (Full ID: HRNBP3|146713)
+        3. BBOX1 (Full ID: BBOX1|8424)
+        4. SNAP91 (Full ID: SNAP91|9892)
+        5. DNER (Full ID: DNER|92737)
+        6. KLK5 (Full ID: KLK5|25818)
+        7. TRPM3 (Full ID: TRPM3|80036)
+        8. CXCL3 (Full ID: CXCL3|2921)
+        9. IL1R2 (Full ID: IL1R2|7850)
+       10. TMEM195 (Full ID: TMEM195|392636)
+
+============================================================
+Visualizing Gene Expression Patterns:
+============================================================

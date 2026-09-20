@@ -1,0 +1,13 @@
+# Packages used by the original notebooks. Original versions were not recorded.
+numpy
+pandas
+matplotlib
+seaborn
+scipy
+scikit-learn
+statsmodels
+Boruta
+xgboost
+lightgbm
+jupyterlab
+ipykernel
